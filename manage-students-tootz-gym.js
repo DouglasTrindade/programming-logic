@@ -32,12 +32,30 @@ const removeStudent = (students) => {
 };
 
 const checkinStudent = (students) => {
-  console.log('Check-in \n')
+  console.log('Check-in \n');
   console.log('Digite seu CPF: ');
   let cpf = prompt('');
   const index = students.findIndex(student => student.cpf == cpf);
-  let checkin = {checks};
+  students[index].checks.push({type: 'in', date: new Date()});
+  console.log(students);
 };
+
+const checkoutStudent = (students) => {
+  console.log('Checkout \n');
+  console.log('Digite seu CPF: ');
+  let cpf = prompt('');
+  const index = students.findIndex(student => student.cpf == cpf);
+  students[index].checks.push({type: 'out', date: new Date()});
+  console.log(students);
+};
+
+const checksHistoric = (students) => {
+   console.log('Histórico de Check-in & Checkout do aluno. \n');
+   console.log('Digite o CPF do aluno para ver o histórico: ')
+   let cpf = prompt('');
+   const index = students.findIndex(student => student.cpf == cpf);
+   console.log(students[index].checks);
+}
 
 // Program
 console.log("___________________   _____________________________");
@@ -49,8 +67,9 @@ console.log("                   \\/         \\/                 \\/");
 console.log("\nGestão de alunos da academia Tootz Gym, selecione uma das opções abaixo:\n")
 
 let students = [
-  {nome: 'Douglas', idade: '29', cpf: '09356702461', checks: ['']},
-  {nome: 'Wendell', idade: '29', cpf: '09356702462', checks: ['']} 
+  {nome: 'Douglas', idade: '29', cpf: '09356702460', checks: []},
+  {nome: 'Wendell', idade: '29', cpf: '09356702461', checks: []},
+  {nome: 'Adelino', idade: '29', cpf: '09356702462', checks: []},
 ];
 
 let exit = true;
@@ -75,10 +94,10 @@ while (exit == true) {
     console.log('Aluno removido!\n')
   } else if (selectedOption == 4) {
     checkinStudent(students);
-  // } else if (selectedOption == 5) {
-  //   checkoutStudent();
-  // } else if (selectedOption == 6) {
-  //   console.log(checkinCheckout);
+  } else if (selectedOption == 5) {
+    checkoutStudent(students);
+  } else if (selectedOption) {
+    checksHistoric(students);
   } else if (selectedOption == 7) {
     exit = false;
   }
