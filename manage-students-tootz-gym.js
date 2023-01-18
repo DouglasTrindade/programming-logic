@@ -22,9 +22,9 @@ const addStudent = (students) => {
 const removeStudent = (students) => {
   console.log('Escolha o aluno a ser excluído: ');
   students.map((student, index) => {
-    const number = index + 1
+    const number = index + 1;
     console.log(`${number}. ${student.nome}\n`);
-  })
+  });
 
   let numberRemove = prompt('');
 

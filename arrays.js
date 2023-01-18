@@ -62,7 +62,7 @@ console.log(caneta.name);
 */
 
 
-/*
+
 let car = new Object();
 car.name = 'L200';
 car.price = 27.000;
@@ -79,7 +79,6 @@ car.comprar = function(qtd) {
 };
 
 car.comprar();
-*/
 
 
 /*
