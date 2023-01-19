@@ -1,5 +1,8 @@
 const prompt = require('prompt-sync')();
 
+let guardarIndex = '';
+let carrosAlugados = []; 
+
 const viewClients = (clients) => {
   clients.map((clients) => {
     console.log(`- ${clients.nome} (${clients.cpf})`)
@@ -41,7 +44,7 @@ const removeClient = (clients) => {
 
 const locateCar = (cars) => {
   console.log('Escolha o carro que você deseja alugar:\n')
-  cars.map ((cars, index) => {
+  cars.map((cars, index) => {
     const numberCar = index + 1;
     console.log(`${numberCar}. ${cars.nome}`)
   });
@@ -60,11 +63,7 @@ const locateCar = (cars) => {
 
   console.log('\n')
   let selectedClient = prompt('Opção: ');
-
-  console.log(cars[selectedCar - 1].alugado);
-
  
-
   if (cars[selectedCar - 1].alugado === false) {
     cars[selectedCar - 1].alugado = true;
     console.log('Carro alugado com sucesso!')
@@ -75,8 +74,27 @@ const locateCar = (cars) => {
   console.log('\n')
 };
 
-const returnCar = () => {
+const returnCar = (cars) => {
+  console.log('Escolha o carro que você deseja devolver a locadora.')
+  console.log('\n')
+  const filterCar = cars.filter(rentedCar => rentedCar.alugado == true);
+  filterCar.forEach((rentedCar, index) => {
+    const IndexRentCar = index + 1;
+    console.log(`${IndexRentCar}. ${rentedCar.nome}`);
+  });
 
+  console.log('\n')
+  let saveCar = prompt('Opção: ')
+
+
+  if (cars[saveCar - 1].alugado === true) {
+    cars[saveCar - 1].alugado = false;
+    console.log('O carro foi devolvido, obrigado!')
+  } else if (cars[saveCar - 1].alugado === false) {
+    console.log('Este carro já foi devolvido!')
+  }
+
+  console.log('\n')
 };
 
 console.log("___________________   _____________________________");
@@ -126,7 +144,7 @@ while (exit == true) {
   } else if (selectedOption == 4) {
     locateCar(cars);
   } else if (selectedOption == 5) {
-
+    returnCar(cars);
   } else if (selectedOption == 6) {
     exit = false;
   }
